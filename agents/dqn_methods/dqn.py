@@ -4,7 +4,7 @@ import torch.autograd as autograd
 import numpy as np
 import random
 from collections import deque
-from common.data_structures import SumTree
+#from common.data_structures import SumTree
 
 
 import torch
