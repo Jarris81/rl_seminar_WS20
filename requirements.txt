@@ -1,0 +1,4 @@
+# cat requirements.txt
+torch==1.4.0
+gym==0.17.1
+pandas==0.25.2
