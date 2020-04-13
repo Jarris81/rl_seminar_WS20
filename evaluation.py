@@ -19,10 +19,10 @@ env_list = [
 agent_list = ["dqn1", "dqn2", "ddpg", "sac1", "td31"]
 
 # training values
-max_episodes = 20
-max_steps = 500
+max_episodes = 100000
+max_steps = 1000
 batch_size = 32
-save_step = 5
+save_step = 5000
 
 # dqn params
 learning_rate_dqn = 3e-4
