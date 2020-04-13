@@ -1,8 +1,6 @@
 import gym
 import pandas as pd
 import numpy as np
-from common.utils import mini_batch_train
-import matplotlib.pyplot as plt
 
 # agents
 from agents.pg_methods.ddpg import DDPGAgent
