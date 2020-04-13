@@ -24,9 +24,6 @@ max_steps = 500
 batch_size = 32
 save_step = 5
 
-env1 = gym.make("CarRacing-v0")
-print(env1.action_space)
-
 # dqn params
 learning_rate_dqn = 3e-4
 gamma_dqn = 0.99
