@@ -157,7 +157,7 @@ for env_name in env_list:
         df[agent_name] = result[0]
         df[agent_name + "_time"] = result[1]
 
-    df.to_csv("data/" + env_name + ".csv")
+        df.to_csv("data/" + env_name + agent_name + ".csv")
 
 
 
