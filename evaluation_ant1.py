@@ -32,7 +32,7 @@ buffer_maxlen = 100000
 max_episodes = 10000
 max_steps = 1000
 batch_size = 32
-save_step = 5
+save_step = 5000
 
 # ddpg params
 gamma_ddpg = 0.99
