@@ -29,7 +29,7 @@ learning_rate_dqn = 3e-4
 gamma_dqn = 0.99
 
 # same buffer for all
-buffer_maxlen = 1000000
+buffer_maxlen = 100000
 
 
 

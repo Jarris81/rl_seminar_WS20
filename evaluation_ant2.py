@@ -9,7 +9,11 @@ from agents.pg_methods.common.utils import mini_batch_train
 
 env_list = ['Ant-v3']
 
-agent_list = ['ddpg', 'dpg2', 'dpg6']
+agent_list = [
+    'ddpg',
+    #'dpg2',
+    #'dpg6'
+]
 
 period = 100
 
