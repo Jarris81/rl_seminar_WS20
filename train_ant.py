@@ -1,7 +1,7 @@
 import gym
 import numpy as np
 import pandas as pd
-import time
+import os
 
 from agents.pg_methods.ddpg import DDPGAgent
 from agents.pg_methods.ddpg_hier import DDPGHAgent
@@ -18,7 +18,6 @@ agent_list = [
 
 # TODO store parameters in seperate file
 period = 100
-
 
 #range_leg = 0.01
 #offset_leg = 0.0
@@ -111,7 +110,12 @@ def train_all(envs, agents, max_episodes=10000, max_steps=1000, batch_size=32, s
             df[agent_name] = result[0]
             df[agent_name + "_time"] = result[1]
             # save values in csv file
-            df.to_csv("data/" + env_name + agent_name + ".csv")
+
+            path = "data/" + env_name
+
+            if not os.path.exists(path):
+                os.makedirs(path)
+            df.to_csv(path + agent_name + ".csv")
 
 
 # main function
@@ -128,14 +132,17 @@ if __name__ == "__main__":
     ]
 
     # training values
-    train_max_episodes = 100000
-    train_max_steps = 1000
+    train_max_episodes = 5000
+    train_max_steps = 500
     train_batch_size = 32
     train_save_step = 5000
 
     # start training
-    train_all(env_list, agent_list)
-
+    train_all(env_list, agent_list,
+              max_episodes=train_max_episodes,
+              max_steps=train_max_steps,
+              batch_size=train_batch_size,
+              save_step=train_save_step)
 
 
 

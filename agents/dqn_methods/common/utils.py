@@ -137,8 +137,7 @@ def mini_batch_train_dqn(env, agent, max_episodes, max_steps, batch_size, save_s
             print("Saving model at Episode ", episode)
             agent.save_model(episode)
 
-
-    return episode_rewards
+    return episode_rewards, time_stamp
 
 def mini_batch_train_frames(env, agent, max_frames, batch_size):
     episode_rewards = []

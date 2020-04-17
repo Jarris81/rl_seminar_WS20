@@ -1,6 +1,7 @@
 import gym
 import pandas as pd
 import numpy as np
+import os
 
 # agents
 from agents.pg_methods.ddpg import DDPGAgent
@@ -48,15 +49,16 @@ critic_lr_td3 = 1e-3
 actor_lr_td3 = 1e-3
 
 
-def train(envs, agents, max_episodes=10000, max_steps=1000, batch_size=32, save_step=1000):
+def train_all(envs, agents, max_episodes=10000, max_steps=1000, batch_size=32, save_step=1000):
 
     for env_name in envs:
         # create environment
         env = gym.make(env_name)
+        print(env)
         # create new empty dataframe
-        df = pd.DataFrame()
         # iterate over each agent, create and start mini batch
         for agent_name in agents:
+            df = pd.DataFrame()
             if agent_name == "ddpg":
                 agent = DDPGAgent(env, gamma_ddpg, tau_ddpg, buffer_maxlen, critic_lr_ddpg, actor_lr_ddpg)
                 result = np.asarray(mini_batch_train(env, agent, max_episodes, max_steps, batch_size, save_step))
@@ -81,8 +83,13 @@ def train(envs, agents, max_episodes=10000, max_steps=1000, batch_size=32, save_
             df[agent_name] = result[0]
             df[agent_name+"_time"] = result[1]
 
+            path = "data/" + env_name
+
+            if not os.path.exists(path):
+                os.makedirs(path)
+
             # save values in csv file
-            df.to_csv("data/" + env_name + "_" + agent_name + ".csv")
+            df.to_csv(path + "/" + agent_name + ".csv")
 
 
 # main function
@@ -101,14 +108,18 @@ if __name__ == "__main__":
         "dqn2",
         "ddpg",
         "sac1",
-        "td31"]
+        "td31"
+        ]
 
     # training values
-    train_max_episodes = 100000
-    train_max_steps = 1000
+    train_max_episodes = 1000
+    train_max_steps = 50
     train_batch_size = 32
-    train_save_step = 5000
+    train_save_step = 3000
 
     # start training
-    train(env_list, agent_list,
-          max_episodes=train_max_episodes)
+    train_all(env_list, agent_list,
+              max_episodes=train_max_episodes,
+              max_steps=train_max_steps,
+              batch_size=train_batch_size,
+              save_step=train_save_step)
